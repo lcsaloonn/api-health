@@ -15,7 +15,7 @@ export class ExerciceController {
   constructor(private readonly _exerciceService: ExerciceService) {}
   @Get()
   @ApiOkResponse({ description: 'success' })
-  async getExercice(): Promise<ExerciceModel[]> {
+  async getAllExercice(): Promise<ExerciceModel[]> {
     return this._exerciceService.getAllExercice();
   }
 

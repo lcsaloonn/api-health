@@ -5,7 +5,7 @@ import { ExerciceModel } from 'src/models/exercice.model';
 
 @Injectable()
 export class ExerciceRepository implements IGenericRepository<ExerciceModel> {
-  getAll(): Promise<ExerciceModel[]> {
+  get(): Promise<ExerciceModel> {
     throw new Error('Method not implemented.');
   }
 
@@ -14,7 +14,7 @@ export class ExerciceRepository implements IGenericRepository<ExerciceModel> {
   }
   public connection = MongoDb.instance.db.collection('exercice');
 
-  async get(): Promise<ExerciceModel[]> {
+  async getAll(): Promise<ExerciceModel[]> {
     return await this.connection
       .find<ExerciceModel>({ trash: { $ne: true } })
       .toArray();

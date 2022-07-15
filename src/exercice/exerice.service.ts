@@ -7,7 +7,7 @@ export class ExerciceService {
   constructor(private readonly _exerciceRepository: ExerciceRepository) {}
 
   async getAllExercice(): Promise<ExerciceModel[]> {
-    return this._exerciceRepository.get();
+    return this._exerciceRepository.getAll();
   }
 
   async createExercice(exercice: ExerciceModel): Promise<void> {
