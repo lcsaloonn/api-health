@@ -1,6 +1,11 @@
 import { Module } from '@nestjs/common';
-import { ExerciceResolver } from './exercice.resolver';
-import { ExerciceService } from './exercice.service';
+import { ExerciceRepository } from 'src/repository/exercice.repository';
+import { ExerciceController } from './exercice.controller';
+import { ExerciceService } from './exerice.service';
 
-@Module({ providers: [ExerciceResolver, ExerciceService] })
+@Module({
+  controllers: [ExerciceController],
+  providers: [ExerciceRepository, ExerciceService],
+  imports: [],
+})
 export class ExerciceModule {}

@@ -1,11 +1,5 @@
-import { Field, ObjectType } from '@nestjs/graphql';
-
-@ObjectType()
-export class Exercice {
-  @Field()
-  exerciceId: string;
-  @Field()
+export class ExerciceModel {
+  _id: string;
   name: string;
-  @Field()
   bodyPart: string;
 }
