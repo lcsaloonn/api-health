@@ -15,9 +15,6 @@ export class ExerciceRepository implements IGenericRepository<ExerciceModel> {
 
   async find(options?: any): Promise<ExerciceModel[]> {
     return await this.connection.find<ExerciceModel>(options).toArray();
-    // return await this.connection
-    //   .find<ExerciceModel>({ 'exercice.bodyPart': 'arms' })
-    //   .toArray();
   }
 
   update(id: string, item: createExerciceDto) {
