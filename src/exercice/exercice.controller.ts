@@ -1,8 +1,9 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import {
   ApiBody,
   ApiCreatedResponse,
   ApiOkResponse,
+  ApiParam,
   ApiTags,
 } from '@nestjs/swagger';
 import { ExerciceModel } from 'src/models/exercice.model';
@@ -16,7 +17,15 @@ export class ExerciceController {
   @Get()
   @ApiOkResponse({ description: 'success' })
   async getAllExercice(): Promise<ExerciceModel[]> {
-    return this._exerciceService.getAllExercice();
+    return this._exerciceService.findAllExercice();
+  }
+
+  @Get('getBodyPart/:bodyPart')
+  @ApiOkResponse({ description: 'success' })
+  async getByBodyPart(
+    @Param('bodyPart') bodyPart: string,
+  ): Promise<ExerciceModel[]> {
+    return this._exerciceService.findByBodyPart(bodyPart);
   }
 
   @Post()
