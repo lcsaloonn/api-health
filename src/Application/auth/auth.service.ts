@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { from, Observable, of } from 'rxjs';
 import { UserModel } from 'src/Domaine/models/user.model';
+import { CreateUserDto } from 'src/WebApi/User/Dto/createUser.dto';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const bcrypt = require('bcrypt');
@@ -10,18 +11,15 @@ const bcrypt = require('bcrypt');
 export class AuthService {
   constructor(private readonly jwtService: JwtService) {}
 
-  generateJWT(user: UserModel): Observable<string> {
-    return from(this.jwtService.signAsync({ user }));
+  generateJWT(user: CreateUserDto): Promise<string> {
+    return this.jwtService.signAsync({ user });
   }
 
   async hashPassword(password: string): Promise<string> {
     return await bcrypt.hash(password, 12);
   }
 
-  comparePasswords(
-    newPassword: string,
-    passwordHash: string,
-  ): Observable<any | boolean> {
-    return of<any | boolean>(bcrypt.compare(newPassword, passwordHash));
+  comparePasswords(newPassword: string, passwordHash: string): boolean {
+    return bcrypt.compare(newPassword, passwordHash);
   }
 }

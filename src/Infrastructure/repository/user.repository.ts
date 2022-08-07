@@ -13,6 +13,11 @@ export class UserRepository implements IGenericRepository<UserModel> {
     });
   }
 
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  async findOneBy(option: Object): Promise<UserModel> {
+    return this.connection.findOne<UserModel>(option);
+  }
+
   async find(options?: any): Promise<UserModel[]> {
     return await this.connection.find<UserModel>(options).toArray();
   }

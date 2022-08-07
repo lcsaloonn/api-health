@@ -6,7 +6,7 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { UserModel } from 'src/Domaine/models/user.model';
-import { createUserDto } from './Dto/createUser.dto';
+import { CreateUserDto } from './Dto/createUser.dto';
 import { UserService } from './user.service';
 
 @Controller('user')
@@ -16,14 +16,25 @@ export class UserController {
 
   @Post()
   @ApiCreatedResponse({ description: 'User created' })
-  @ApiBody({ type: createUserDto })
+  @ApiBody({ type: CreateUserDto })
   async createUser(@Body() user: UserModel): Promise<void> {
     this._userService.createUser(user);
+  }
+
+  @Post('login')
+  @ApiBody({ type: CreateUserDto })
+  async login(@Body() user: CreateUserDto): Promise<string> {
+    return this._userService.login(user);
   }
 
   @Get()
   @ApiOkResponse({ description: 'success' })
   async getAllUsers(): Promise<UserModel[]> {
     return this._userService.findAll();
+  }
+
+  @Get('test')
+  async getTest() {
+    return this._userService.ValidateUser('vadl', 'Jhopm55');
   }
 }
