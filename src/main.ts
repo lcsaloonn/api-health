@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
-import { MongoDb } from './DataBase/db.connection';
+import { MongoDb } from './Infrastructure/DataBase/db.connection';
 const port = process.env.PORT || 3000;
 
 async function bootstrap() {
