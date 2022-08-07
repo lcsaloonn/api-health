@@ -3,10 +3,9 @@ import {
   ApiBody,
   ApiCreatedResponse,
   ApiOkResponse,
-  ApiParam,
   ApiTags,
 } from '@nestjs/swagger';
-import { ExerciceModel } from 'src/models/exercice.model';
+import { ExerciceModel } from 'src/Domaine/models/exercice.model';
 import { createExerciceDto } from './Dto/createExercice.dto';
 import { ExerciceService } from './exerice.service';
 
@@ -16,7 +15,7 @@ export class ExerciceController {
   constructor(private readonly _exerciceService: ExerciceService) {}
   @Get()
   @ApiOkResponse({ description: 'success' })
-  async getAllExercice(): Promise<ExerciceModel[]> {
+  async getAllExercices(): Promise<ExerciceModel[]> {
     return this._exerciceService.findAllExercice();
   }
 

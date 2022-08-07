@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { ObjectId } from 'mongodb';
-import { IGenericRepository } from 'src/core/abstract/generic-repository.abstract';
-import { MongoDb } from 'src/DataBase/db.connection';
+import { IGenericRepository } from 'src/Infrastructure/repository/abstract/generic-repository.abstract';
+import { MongoDb } from 'src/Infrastructure/DataBase/db.connection';
 import { createExerciceDto } from 'src/exercice/Dto/createExercice.dto';
-import { ExerciceModel } from 'src/models/exercice.model';
+import { ExerciceModel } from 'src/Domaine/models/exercice.model';
 
 @Injectable()
 export class ExerciceRepository implements IGenericRepository<ExerciceModel> {
@@ -23,6 +23,6 @@ export class ExerciceRepository implements IGenericRepository<ExerciceModel> {
   public connection = MongoDb.instance.db.collection('exercice');
 
   async create(exercice: ExerciceModel): Promise<void> {
-    await this.connection.insertOne({ exercice });
+    await this.connection.insertOne(exercice);
   }
 }

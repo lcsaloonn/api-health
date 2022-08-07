@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { ExerciceModel } from 'src/models/exercice.model';
-import { ExerciceRepository } from 'src/repository/exercice.repository';
+import { ExerciceModel } from 'src/Domaine/models/exercice.model';
+import { ExerciceRepository } from 'src/Infrastructure/repository/exercice.repository';
 
 @Injectable()
 export class ExerciceService {
@@ -22,6 +22,8 @@ export class ExerciceService {
   }
 
   async createExercice(exercice: ExerciceModel): Promise<void> {
-    this._exerciceRepository.create(exercice);
+    this._exerciceRepository.create(
+      new ExerciceModel(exercice.name, exercice.bodyPart),
+    );
   }
 }
