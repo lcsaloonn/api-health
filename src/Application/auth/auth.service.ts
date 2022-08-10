@@ -22,4 +22,19 @@ export class AuthService {
   comparePasswords(newPassword: string, passwordHash: string): boolean {
     return bcrypt.compare(newPassword, passwordHash);
   }
+
+  verifyRegisterData(userData: UserModel): boolean {
+    const passwordRegex = new RegExp(
+      '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})',
+    );
+    const userNameRegex = new RegExp('^[a-zA-Z0-9]+$');
+    if (
+      userData.password.match(passwordRegex) &&
+      userData.username.match(userNameRegex)
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

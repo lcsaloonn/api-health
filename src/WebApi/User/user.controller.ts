@@ -17,13 +17,13 @@ export class UserController {
   @Post()
   @ApiCreatedResponse({ description: 'User created' })
   @ApiBody({ type: CreateUserDto })
-  async createUser(@Body() user: UserModel): Promise<void> {
-    this._userService.createUser(user);
+  async createUser(@Body() user: UserModel): Promise<string> {
+    return this._userService.createUser(user);
   }
 
   @Post('login')
   @ApiBody({ type: CreateUserDto })
-  async login(@Body() user: CreateUserDto): Promise<string> {
+  async login(@Body() user: CreateUserDto): Promise<LoginResponse> {
     return this._userService.login(user);
   }
 
@@ -35,6 +35,7 @@ export class UserController {
 
   @Get('test')
   async getTest() {
-    return this._userService.ValidateUser('vadl', 'Jhopm55');
+    const user = new UserModel('thomas', 'Thomas8*');
+    return this._userService.isDuplicationPseudo('vddal');
   }
 }

@@ -13,13 +13,20 @@ export class UserService {
   ) {}
 
   /** ici rajouter les verifications
-   * - mot de passe corect regex
+   *
    * - pas de doublon de pseudo
+   *
+   * verifier que username nexiste pas
    */
-  async createUser(user: UserModel): Promise<void> {
-    const hashPassword = await this.authService.hashPassword(user.password);
-    const newUser = new UserModel(user.username, hashPassword);
-    this._userRepository.create(newUser);
+  async createUser(user: UserModel): Promise<string> {
+    if (!this.authService.verifyRegisterData(user)) {
+      return 'password or username incorect';
+    } else {
+      const hashPassword = await this.authService.hashPassword(user.password);
+      const newUser = new UserModel(user.username, hashPassword);
+      this._userRepository.create(newUser);
+      return 'is created';
+    }
   }
 
   async findAll(): Promise<UserModel[]> {
@@ -38,21 +45,22 @@ export class UserService {
     return this._userRepository.findOneBy(data);
   }
 
-  //rempalcer type promesse
-  async login(user: CreateUserDto): Promise<any> {
-    const isValidate = await this.ValidateUser(user.username, user.password);
-    //crée un type
-    const data = {
-      token: '' || null,
-      isSuccess: false,
-    };
+  async login(user: CreateUserDto): Promise<LoginResponse> {
+    const isValidate: boolean = await this.ValidateUser(
+      user.username,
+      user.password,
+    );
+
     if (isValidate) {
-      data.token = await this.authService.generateJWT(user);
-      data.isSuccess = true;
+      return {
+        token: await this.authService.generateJWT(user),
+        isSuccess: true,
+      };
     } else {
-      data.isSuccess = false;
+      return {
+        isSuccess: false,
+      };
     }
-    return data;
   }
 
   async ValidateUser(username: string, password: string): Promise<boolean> {
@@ -66,5 +74,19 @@ export class UserService {
     } catch {
       return false;
     }
+  }
+
+  //A refactor!!
+  isDuplicationPseudo(username: string): boolean {
+    try {
+      this.findByUsername(username);
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
+  async test(user: UserModel) {
+    return this.authService.verifyRegisterData(user);
   }
 }
