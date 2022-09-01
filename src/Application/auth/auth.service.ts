@@ -1,8 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { from, Observable, of } from 'rxjs';
 import { UserModel } from 'src/Domaine/models/user.model';
-import { CreateUserDto } from 'src/WebApi/User/Dto/createUser.dto';
+import { CreateUserDto } from 'src/modules/User/Dto/createUser.dto';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const bcrypt = require('bcrypt');

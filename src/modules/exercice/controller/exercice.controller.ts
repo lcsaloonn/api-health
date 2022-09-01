@@ -6,8 +6,8 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { ExerciceModel } from 'src/Domaine/models/exercice.model';
-import { createExerciceDto } from './Dto/createExercice.dto';
-import { ExerciceService } from './exerice.service';
+import { createExerciceDto } from '../Dto/createExercice.dto';
+import { ExerciceService } from '../services/exerice.service';
 
 @Controller('exercice')
 @ApiTags('exercice')

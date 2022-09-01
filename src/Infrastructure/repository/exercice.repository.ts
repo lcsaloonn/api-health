@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { ObjectId } from 'mongodb';
 import { IGenericRepository } from 'src/Infrastructure/repository/abstract/generic-repository.abstract';
 import { MongoDb } from 'src/Infrastructure/DataBase/db.connection';
-import { createExerciceDto } from 'src/exercice/Dto/createExercice.dto';
 import { ExerciceModel } from 'src/Domaine/models/exercice.model';
+import { createExerciceDto } from 'src/modules/exercice/Dto/createExercice.dto';
 
 @Injectable()
 export class ExerciceRepository implements IGenericRepository<ExerciceModel> {

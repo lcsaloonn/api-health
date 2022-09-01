@@ -2,9 +2,9 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ExerciceModule } from './exercice/exercice.module';
 import { AuthModule } from './Application/auth/auth.module';
-import { UserModule } from './WebApi/User/user.module';
+import { ExerciceModule } from './modules/exercice/exercice.module';
+import { UserModule } from './modules/User/user.module';
 
 @Module({
   imports: [
