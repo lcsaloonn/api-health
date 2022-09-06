@@ -37,7 +37,6 @@ export class UserService {
     users.forEach((user) => {
       delete user.password;
     });
-    console.log(users);
     return users;
   }
 
