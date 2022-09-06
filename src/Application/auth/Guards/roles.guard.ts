@@ -6,7 +6,7 @@ import {
   forwardRef,
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
-import { UserService } from 'src/modules/User/user.service';
+import { UserService } from 'src/modules/User/services/user.service';
 import { UserSecurityService } from '../services/security-services/user-sercurity.service';
 
 @Injectable()
