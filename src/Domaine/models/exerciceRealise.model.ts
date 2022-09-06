@@ -6,6 +6,7 @@ export class ExerciceRealiseModel {
   repetition: number;
   weight: number;
   numberOfSerie: number;
+  date: Date;
 
   constructor(
     exerciceId: ObjectId,
@@ -13,9 +14,10 @@ export class ExerciceRealiseModel {
     numberOfSerie: number,
     weight?: number,
   ) {
-    exerciceId = this.exercieId;
-    repetition = this.repetition;
-    numberOfSerie = this.numberOfSerie;
-    if (weight != null) weight = this.weight;
+    this.exercieId = exerciceId;
+    this.repetition = repetition;
+    this.numberOfSerie = numberOfSerie;
+    if (weight != null) this.weight = weight;
+    this.date = new Date();
   }
 }
