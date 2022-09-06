@@ -13,18 +13,25 @@ import { ExerciceService } from '../services/exerice.service';
 @ApiTags('exercice')
 export class ExerciceController {
   constructor(private readonly _exerciceService: ExerciceService) {}
+
   @Get()
   @ApiOkResponse({ description: 'success' })
   async getAllExercices(): Promise<ExerciceModel[]> {
     return this._exerciceService.findAllExercice();
   }
 
-  @Get('getBodyPart/:bodyPart')
+  @Get('getByBodyPart/:bodyPart')
   @ApiOkResponse({ description: 'success' })
   async getByBodyPart(
     @Param('bodyPart') bodyPart: string,
   ): Promise<ExerciceModel[]> {
     return this._exerciceService.findByBodyPart(bodyPart);
+  }
+
+  @Get('getByLevel/:level')
+  @ApiOkResponse({ description: 'success' })
+  async getByLevel(@Param('level') level: number): Promise<ExerciceModel[]> {
+    return this._exerciceService.findByLevel(level);
   }
 
   @Post()

@@ -21,9 +21,21 @@ export class ExerciceService {
     return this._exerciceRepository.find(data);
   }
 
+  async findByLevel(level: number): Promise<ExerciceModel[]> {
+    const data = {
+      'exercice.level': level,
+    };
+    return this._exerciceRepository.find(data);
+  }
+
   async createExercice(exercice: ExerciceModel): Promise<void> {
     this._exerciceRepository.create(
-      new ExerciceModel(exercice.name, exercice.bodyPart),
+      new ExerciceModel(
+        exercice.name,
+        exercice.bodyPart,
+        exercice.description,
+        exercice.level,
+      ),
     );
   }
 }

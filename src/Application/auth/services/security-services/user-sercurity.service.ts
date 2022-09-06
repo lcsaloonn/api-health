@@ -1,24 +1,16 @@
 import { Injectable } from '@nestjs/common';
-import { map } from 'rxjs';
-import { AuthService } from 'src/Application/auth/services/auth/auth.service';
-
 import { UserModel } from 'src/Domaine/models/user.model';
 import { UserRepository } from 'src/Infrastructure/repository/user.repository';
-import { CreateUserDto } from './Dto/createUser.dto';
+import { CreateUserDto } from 'src/modules/User/Dto/createUser.dto';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable()
-export class UserService {
+export class UserSecurityService {
   constructor(
     private readonly _userRepository: UserRepository,
     private authService: AuthService,
   ) {}
 
-  /** ici rajouter les verifications
-   *
-   * - pas de doublon de pseudo
-   *
-   * verifier que username nexiste pas
-   */
   async createUser(user: UserModel): Promise<string> {
     if (!this.authService.verifyRegisterData(user)) {
       return 'password or username incorect';
@@ -28,17 +20,6 @@ export class UserService {
       this._userRepository.create(newUser);
       return 'is created';
     }
-  }
-
-  async findAll(): Promise<UserModel[]> {
-    let users: UserModel[] = [];
-    users = await this._userRepository.find();
-
-    users.forEach((user) => {
-      delete user.password;
-    });
-    console.log(users);
-    return users;
   }
 
   async findByUsername(username: string): Promise<UserModel> {
@@ -77,7 +58,6 @@ export class UserService {
     }
   }
 
-  //A refactor!!
   isDuplicationPseudo(username: string): boolean {
     try {
       this.findByUsername(username);
@@ -85,9 +65,5 @@ export class UserService {
     } catch {
       return false;
     }
-  }
-
-  async test(user: UserModel) {
-    return this.authService.verifyRegisterData(user);
   }
 }
