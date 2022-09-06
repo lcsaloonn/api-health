@@ -16,14 +16,14 @@ export class ExerciceService {
 
   async findByBodyPart(bodyPart: string): Promise<ExerciceModel[]> {
     const data = {
-      'exercice.bodyPart': bodyPart,
+      bodyPart: bodyPart,
     };
     return this._exerciceRepository.find(data);
   }
 
   async findByLevel(level: number): Promise<ExerciceModel[]> {
     const data = {
-      'exercice.level': level,
+      level: Number(level),
     };
     return this._exerciceRepository.find(data);
   }
