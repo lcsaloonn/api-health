@@ -17,20 +17,21 @@ import { UserService } from '../services/user.service';
 @ApiTags('user')
 export class UserController {
   constructor(
-    private readonly _userService: UserService, //private userSecurityService: UserSecurityService,
+    private readonly _userService: UserService,
+    private userSecurityService: UserSecurityService,
   ) {}
 
   @Post()
   @ApiCreatedResponse({ description: 'User created' })
   @ApiBody({ type: CreateUserDto })
   async createUser(@Body() user: UserModel): Promise<string> {
-    return this._userService.createUser(user);
+    return this.userSecurityService.createUser(user);
   }
 
   @Post('login')
   @ApiBody({ type: CreateUserDto })
   async login(@Body() user: CreateUserDto): Promise<LoginResponse> {
-    return this._userService.login(user);
+    return this.userSecurityService.login(user);
   }
 
   // @hasRoles('admin')

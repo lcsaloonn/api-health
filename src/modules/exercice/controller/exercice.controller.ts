@@ -5,6 +5,7 @@ import {
   ApiOkResponse,
   ApiTags,
 } from '@nestjs/swagger';
+import { UserSecurityService } from 'src/Application/auth/services/security-services/user-sercurity.service';
 import { ExerciceModel } from 'src/Domaine/models/exercice.model';
 import { createExerciceDto } from '../Dto/createExercice.dto';
 import { ExerciceService } from '../services/exerice.service';

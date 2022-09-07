@@ -9,6 +9,8 @@ import { JwtStrategy } from './Guards/jwt-strategy';
 import { JwtAuthGuard } from './Guards/jwt.guard';
 import { RolesGuard } from './Guards/roles.guard';
 import { UserSecurityService } from './services/security-services/user-sercurity.service';
+import { ExerciceRepository } from 'src/Infrastructure/repository/exercice.repository';
+import { UserRepository } from 'src/Infrastructure/repository/user.repository';
 
 @Module({
   imports: [
@@ -21,8 +23,16 @@ import { UserSecurityService } from './services/security-services/user-sercurity
       }),
     }),
   ],
-  providers: [AuthService, JwtAuthGuard],
-  // RolesGuard, JwtAuthGuard, JwtStrategy
-  exports: [AuthService],
+  providers: [
+    AuthService,
+    JwtAuthGuard,
+    UserSecurityService,
+    UserRepository,
+    RolesGuard,
+    JwtStrategy,
+    ConfigService,
+  ],
+
+  exports: [UserSecurityService, AuthModule],
 })
 export class AuthModule {}
