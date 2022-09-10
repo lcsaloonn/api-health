@@ -13,6 +13,12 @@ export class UserSecurityService {
     private authService: AuthService,
   ) {}
 
+  /**
+   * Ameliorations
+   *  -move fonction verifyRegisterData
+   *  - better error response
+   *
+   */
   async createUser(user: UserModel): Promise<string> {
     if (!this.authService.verifyRegisterData(user)) {
       return 'password or username incorect';
