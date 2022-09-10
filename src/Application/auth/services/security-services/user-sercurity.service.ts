@@ -17,11 +17,14 @@ export class UserSecurityService {
    * Ameliorations
    *  -move fonction verifyRegisterData
    *  - better error response
-   *
+   *  - gestion des cas dans le if à opti
    */
   async createUser(user: UserModel): Promise<string> {
+    const userfind: UserModel = await this.findByUsername(user.username);
     if (!this.authService.verifyRegisterData(user)) {
       return 'password or username incorect';
+    } else if (userfind != null) {
+      return 'username incorect';
     } else {
       const hashPassword = await this.authService.hashPassword(user.password);
       const newUser = new UserModel(user.username, hashPassword, UserRole.USER);
