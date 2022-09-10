@@ -1,5 +1,6 @@
 import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import {
+  ApiBearerAuth,
   ApiBody,
   ApiCreatedResponse,
   ApiOkResponse,
@@ -37,6 +38,7 @@ export class UserController {
   @hasRoles('admin')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Get()
+  @ApiBearerAuth('JWT-auth')
   @ApiOkResponse({ description: 'success' })
   async getAllUsers(): Promise<UserModel[]> {
     return this._userService.findAll();
