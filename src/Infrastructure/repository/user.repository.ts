@@ -7,7 +7,7 @@ import { UserModel } from 'src/Domaine/models/user.model';
 @Injectable()
 export class UserRepository implements IGenericRepository<UserModel> {
   public connection = MongoDb.instance.db.collection('user');
-  async findOne(id: string): Promise<UserModel> {
+  async findOne(id: string | ObjectId): Promise<UserModel> {
     return await this.connection.findOne<UserModel>({
       _id: new ObjectId(id),
     });

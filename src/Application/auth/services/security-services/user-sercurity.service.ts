@@ -24,7 +24,7 @@ export class UserSecurityService {
     }
   }
 
-  async findById(userId: string): Promise<UserModel> {
+  async findById(userId: string | ObjectId): Promise<UserModel> {
     return this._userRepository.findOne(userId);
   }
 
