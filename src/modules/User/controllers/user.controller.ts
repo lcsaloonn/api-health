@@ -34,8 +34,8 @@ export class UserController {
     return this.userSecurityService.login(user);
   }
 
-  // @hasRoles('admin')
-  // @UseGuards(JwtAuthGuard, RolesGuard)
+  @hasRoles('admin')
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @Get()
   @ApiOkResponse({ description: 'success' })
   async getAllUsers(): Promise<UserModel[]> {
