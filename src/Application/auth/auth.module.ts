@@ -11,7 +11,13 @@ import { RolesGuard } from './Guards/roles.guard';
 import { UserSecurityService } from './services/security-services/user-sercurity.service';
 import { ExerciceRepository } from 'src/Infrastructure/repository/exercice.repository';
 import { UserRepository } from 'src/Infrastructure/repository/user.repository';
-
+/**
+ * modification à apporter
+ *
+ *  -refresh token
+ *  - auth0
+ *
+ */
 @Module({
   imports: [
     JwtModule.registerAsync({
@@ -19,7 +25,7 @@ import { UserRepository } from 'src/Infrastructure/repository/user.repository';
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) => ({
         secret: configService.get('JWT_SECRET'),
-        signOptions: { expiresIn: '10000s' },
+        signOptions: { expiresIn: '1h' },
       }),
     }),
   ],

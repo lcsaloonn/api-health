@@ -57,6 +57,7 @@ export class UserSecurityService {
     if (isValidate) {
       const userfind: UserModel = await this.findByUsername(user.username);
       const readUser = {
+        _id: userfind._id,
         username: userfind.username,
         role: userfind.role,
       };
