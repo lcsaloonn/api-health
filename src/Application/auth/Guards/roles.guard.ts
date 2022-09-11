@@ -19,7 +19,6 @@ export class RolesGuard implements CanActivate {
 
   canActivate(context: ExecutionContext): boolean | Promise<boolean> {
     const roles = this.reflector.get<string[]>('roles', context.getHandler());
-    console.log(roles);
     if (!roles) return true;
 
     const request = context.switchToHttp().getRequest();
@@ -32,7 +31,6 @@ export class RolesGuard implements CanActivate {
 
     if (roles.indexOf(user.role) > -1) {
       hasPermission = true;
-      console.log('bien');
     }
 
     return hasPermission;
