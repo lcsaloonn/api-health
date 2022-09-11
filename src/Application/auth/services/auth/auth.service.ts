@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UserModel } from 'src/Domaine/models/user.model';
 import { CreateUserDto } from 'src/modules/User/Dto/createUser.dto';
+import { ReadUserDto } from 'src/modules/User/Dto/readUser.dto';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const bcrypt = require('bcrypt');
@@ -10,7 +11,7 @@ const bcrypt = require('bcrypt');
 export class AuthService {
   constructor(private readonly jwtService: JwtService) {}
 
-  generateJWT(user: CreateUserDto): Promise<string> {
+  generateJWT(user: ReadUserDto): Promise<string> {
     return this.jwtService.signAsync({ user });
   }
 

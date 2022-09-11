@@ -42,6 +42,12 @@ export class UserSecurityService {
     return this._userRepository.findOneBy(data);
   }
 
+  /**
+   *
+   * A refactor logique
+   * 2x appel method userfind
+   * creation d'un type inutile
+   */
   async login(user: CreateUserDto): Promise<LoginResponse> {
     const isValidate: boolean = await this.ValidateUser(
       user.username,
@@ -49,8 +55,13 @@ export class UserSecurityService {
     );
 
     if (isValidate) {
+      const userfind: UserModel = await this.findByUsername(user.username);
+      const readUser = {
+        username: userfind.username,
+        role: userfind.role,
+      };
       return {
-        token: await this.authService.generateJWT(user),
+        token: await this.authService.generateJWT(readUser),
         isSuccess: true,
       };
     } else {
@@ -63,11 +74,11 @@ export class UserSecurityService {
   async ValidateUser(username: string, password: string): Promise<boolean> {
     try {
       const userfind: UserModel = await this.findByUsername(username);
-      const data = this.authService.comparePasswords(
+      const isGoodPassword = this.authService.comparePasswords(
         password,
         userfind.password,
       );
-      return data;
+      return isGoodPassword;
     } catch {
       return false;
     }
