@@ -10,6 +10,7 @@ import { hasRoles } from 'src/Application/auth/decorators/roles.decorator';
 import { JwtAuthGuard } from 'src/Application/auth/Guards/jwt.guard';
 import { RolesGuard } from 'src/Application/auth/Guards/roles.guard';
 import { UserSecurityService } from 'src/Application/auth/services/security-services/user-sercurity.service';
+import { UserRole } from 'src/Domaine/Enums/roles.enums';
 import { UserModel } from 'src/Domaine/models/user.model';
 import { CreateUserDto } from '../Dto/createUser.dto';
 import { UserService } from '../services/user.service';
@@ -35,7 +36,7 @@ export class UserController {
     return this.userSecurityService.login(user);
   }
 
-  @hasRoles('admin')
+  @hasRoles(UserRole.ADMIN)
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Get()
   @ApiBearerAuth('JWT-auth')
