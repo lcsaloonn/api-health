@@ -1,12 +1,13 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, UseFilters } from '@nestjs/common';
 import {
   ApiBody,
   ApiCreatedResponse,
   ApiOkResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import { UserSecurityService } from 'src/Application/auth/services/security-services/user-sercurity.service';
 import { ExerciceModel } from 'src/Domaine/models/exercice.model';
+import { ExerciceNotFoundException } from 'src/exceptions/exercice.exceptions';
+import { HttpExceptionFilter } from 'src/exceptions/filters/httpException.filter';
 import { createExerciceDto } from '../Dto/createExercice.dto';
 import { ExerciceService } from '../services/exerice.service';
 
@@ -21,12 +22,15 @@ export class ExerciceController {
     return this._exerciceService.findAllExercice();
   }
 
+  @UseFilters(HttpExceptionFilter)
   @Get('getByBodyPart/:bodyPart')
   @ApiOkResponse({ description: 'success' })
   async getByBodyPart(
     @Param('bodyPart') bodyPart: string,
   ): Promise<ExerciceModel[]> {
-    return this._exerciceService.findByBodyPart(bodyPart);
+    const exercice = await this._exerciceService.findByBodyPart(bodyPart);
+    if (exercice.length) return exercice;
+    else throw new ExerciceNotFoundException();
   }
 
   @Get('getByLevel/:level')

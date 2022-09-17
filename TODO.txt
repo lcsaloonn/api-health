@@ -1,2 +1,0 @@
-1) verify endpoint
-2) code response
