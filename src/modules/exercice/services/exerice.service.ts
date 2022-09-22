@@ -1,10 +1,14 @@
 import { Injectable } from '@nestjs/common';
+import { SortAlgorithm } from 'src/Application/util/algorithms/sortAlgorithm.service';
 import { ExerciceModel } from 'src/Domaine/models/exercice.model';
 import { ExerciceRepository } from 'src/Infrastructure/repository/exercice.repository';
 
 @Injectable()
 export class ExerciceService {
-  constructor(private readonly _exerciceRepository: ExerciceRepository) {}
+  constructor(
+    private readonly _exerciceRepository: ExerciceRepository,
+    private sortAlgorithm: SortAlgorithm,
+  ) {}
 
   async findAllExercice(): Promise<ExerciceModel[]> {
     return this._exerciceRepository.find();
@@ -37,5 +41,11 @@ export class ExerciceService {
         exercice.level,
       ),
     );
+  }
+
+  async findBySort(): Promise<ExerciceModel[]> {
+    const exercices = await this._exerciceRepository.find();
+    const n = this.sortAlgorithm.sortAlphabetical(exercices);
+    return exercices;
   }
 }

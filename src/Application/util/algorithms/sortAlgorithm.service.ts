@@ -1,4 +1,7 @@
 export class SortAlgorithm {
+  /***
+   * refactor into factory
+   */
   sortAlphabetical(array: Array<any>): Array<any> {
     return array.sort();
   }
