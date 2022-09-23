@@ -10,6 +10,10 @@ export class ExerciceService {
     private sortAlgorithm: SortAlgorithm,
   ) {}
 
+  /**
+   *  FIND
+   */
+
   async findAllExercice(): Promise<ExerciceModel[]> {
     return this._exerciceRepository.find();
   }
@@ -32,20 +36,25 @@ export class ExerciceService {
     return this._exerciceRepository.find(data);
   }
 
+  async findBySort(): Promise<ExerciceModel[]> {
+    const exercices = await this._exerciceRepository.find();
+    const sorted = this.sortAlgorithm.sortAlphabetical(exercices);
+    return sorted;
+  }
+
+  /**
+   *  Create
+   */
+
   async createExercice(exercice: ExerciceModel): Promise<void> {
     this._exerciceRepository.create(
       new ExerciceModel(
-        exercice.name,
-        exercice.bodyPart,
+        exercice.title,
         exercice.description,
-        exercice.level,
+        exercice.raiting,
+        exercice.bodyPart,
+        exercice.imgaeUrl,
       ),
     );
-  }
-
-  async findBySort(): Promise<ExerciceModel[]> {
-    const exercices = await this._exerciceRepository.find();
-    const n = this.sortAlgorithm.sortAlphabetical(exercices);
-    return exercices;
   }
 }

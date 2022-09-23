@@ -1,16 +1,29 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { IBodyPart } from 'src/Domaine/models/exercice.model';
 
 export class createExerciceDto {
   @ApiProperty({ type: String, description: 'name', example: 'curl' })
-  name: string;
-  @ApiProperty({ type: String, description: 'bodyPart', example: 'arms' })
-  bodyPart: string;
+  title: string;
+
+  @ApiProperty({ type: String, description: 'description', example: '' })
+  description: string;
+
+  @ApiProperty({ type: Number, description: 'raiting', example: '5' })
+  raiting: number;
+
+  @ApiProperty({
+    enum: IBodyPart,
+    description: 'bodyPart',
+    example: IBodyPart.ARMS,
+    required: true,
+    isArray: true,
+  })
+  bodyPart: IBodyPart;
+
   @ApiProperty({
     type: String,
-    description: 'description',
-    example: 'mouvement de bas en haut',
+    description: 'urlImage',
+    example: 'face-pull-exercice-epaules.jpg',
   })
-  description: string;
-  @ApiProperty({ type: Number, description: 'level', example: '5' })
-  level: number;
+  imgaeUrl: string;
 }

@@ -1,6 +1,10 @@
+import { IBodyPart } from 'src/Domaine/models/exercice.model';
+
 export class readExerciceDto {
-  name: string;
-  bodyPart: string;
+  _id: string;
+  title: string;
   description: string;
-  level: number;
+  raiting: number;
+  bodyPart: IBodyPart;
+  imgaeUrl: string;
 }

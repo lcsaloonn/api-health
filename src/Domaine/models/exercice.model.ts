@@ -1,22 +1,40 @@
 import { ObjectId } from 'mongodb';
 
+export enum IBodyPart {
+  BACK = 'back',
+  LEGS = 'legs',
+  SHOULDER = 'shoulder',
+  ARMS = 'arms',
+  PECS = 'pecs',
+}
+
 export class ExerciceModel {
   _id: ObjectId;
-  name: string;
-  bodyPart: string;
+  title: string;
   description: string;
-  level: number;
+  raiting: number;
+  bodyPart: IBodyPart;
+  imgaeUrl: string;
 
   constructor(
-    name: string,
-    bodyPart: string,
+    title: string,
     description: string,
-    level: number,
+    raiting: number,
+    bodyPart: IBodyPart,
+    imgaeUrl: string,
   ) {
     this._id = new ObjectId();
-    this.name = name;
-    this.bodyPart = bodyPart;
+    this.title = title;
     this.description = description;
-    this.level = level;
+    this.raiting = raiting;
+    this.bodyPart = bodyPart;
+    this.imgaeUrl = imgaeUrl;
+  }
+
+  private set setRaiting(raiting: number) {
+    if (raiting > 5) {
+      throw new Error('invalid raiting');
+    }
+    this.raiting = raiting;
   }
 }
