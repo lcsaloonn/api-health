@@ -1,4 +1,5 @@
 import { ObjectId } from 'mongodb';
+import { IExercice } from '../../../Domaine/Types/exercice.interface';
 
 export enum IBodyPart {
   BACK = 'back',
@@ -8,7 +9,7 @@ export enum IBodyPart {
   PECS = 'pecs',
 }
 
-export class ExerciceModel {
+export class ExerciceModel implements IExercice {
   _id: ObjectId;
   title: string;
   description: string;

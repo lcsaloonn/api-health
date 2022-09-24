@@ -1,7 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { SortAlgorithm } from 'src/Application/util/algorithms/sortAlgorithm.service';
-import { ExerciceModel } from 'src/Domaine/models/exercice.model';
+import { ExerciceModel } from 'src/modules/exercice/model/exercice.model';
 import { ExerciceRepository } from 'src/Infrastructure/repository/exercice.repository';
+import { createExerciceDto } from '../Dto/createExercice.dto';
+import { IExercice } from 'src/Domaine/Types/exercice.interface';
 
 @Injectable()
 export class ExerciceService {
@@ -14,29 +16,29 @@ export class ExerciceService {
    *  FIND
    */
 
-  async findAllExercice(): Promise<ExerciceModel[]> {
+  async findAllExercice(): Promise<IExercice[]> {
     return this._exerciceRepository.find();
   }
 
-  async findById(id: string): Promise<ExerciceModel> {
+  async findById(id: string): Promise<IExercice> {
     return this._exerciceRepository.findOne(id);
   }
 
-  async findByBodyPart(bodyPart: string): Promise<ExerciceModel[]> {
+  async findByBodyPart(bodyPart: string): Promise<IExercice[]> {
     const data = {
       bodyPart: bodyPart,
     };
     return this._exerciceRepository.find(data);
   }
 
-  async findByLevel(level: number): Promise<ExerciceModel[]> {
+  async findByLevel(level: number): Promise<IExercice[]> {
     const data = {
       level: Number(level),
     };
     return this._exerciceRepository.find(data);
   }
 
-  async findBySort(): Promise<ExerciceModel[]> {
+  async findBySort(): Promise<IExercice[]> {
     const exercices = await this._exerciceRepository.find();
     const sorted = this.sortAlgorithm.sortAlphabetical(exercices);
     return sorted;
@@ -46,7 +48,7 @@ export class ExerciceService {
    *  Create
    */
 
-  async createExercice(exercice: ExerciceModel): Promise<void> {
+  async createExercice(exercice: createExerciceDto): Promise<void> {
     this._exerciceRepository.create(
       new ExerciceModel(
         exercice.title,

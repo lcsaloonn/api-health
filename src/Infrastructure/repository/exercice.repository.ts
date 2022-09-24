@@ -2,19 +2,19 @@ import { Injectable } from '@nestjs/common';
 import { ObjectId } from 'mongodb';
 import { IGenericRepository } from 'src/Infrastructure/repository/abstract/generic-repository.abstract';
 import { MongoDb } from 'src/Infrastructure/DataBase/db.connection';
-import { ExerciceModel } from 'src/Domaine/models/exercice.model';
 import { createExerciceDto } from 'src/modules/exercice/Dto/createExercice.dto';
+import { IExercice } from 'src/Domaine/Types/exercice.interface';
 
 @Injectable()
-export class ExerciceRepository implements IGenericRepository<ExerciceModel> {
-  async findOne(id: string): Promise<ExerciceModel> {
-    return await this.connection.findOne<ExerciceModel>({
+export class ExerciceRepository implements IGenericRepository<IExercice> {
+  async findOne(id: string): Promise<IExercice> {
+    return await this.connection.findOne<IExercice>({
       _id: new ObjectId(id),
     });
   }
 
-  async find(options?: any): Promise<ExerciceModel[]> {
-    return await this.connection.find<ExerciceModel>(options).toArray();
+  async find(options?: any): Promise<IExercice[]> {
+    return await this.connection.find<IExercice>(options).toArray();
   }
 
   update(id: string, item: createExerciceDto) {
@@ -22,7 +22,7 @@ export class ExerciceRepository implements IGenericRepository<ExerciceModel> {
   }
   public connection = MongoDb.instance.db.collection('exercice');
 
-  async create(exercice: ExerciceModel): Promise<void> {
+  async create(exercice: IExercice): Promise<void> {
     await this.connection.insertOne(exercice);
   }
 }

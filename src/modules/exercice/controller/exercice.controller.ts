@@ -5,11 +5,12 @@ import {
   ApiOkResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import { ExerciceModel } from 'src/Domaine/models/exercice.model';
 import { ExerciceNotFoundException } from 'src/exceptions/exercice.exceptions';
 import { HttpExceptionFilter } from 'src/exceptions/filters/httpException.filter';
 import { createExerciceDto } from '../Dto/createExercice.dto';
 import { ExerciceService } from '../services/exerice.service';
+import { CreateExerciceSchema } from '../schema/exercice.schema';
+import { IExercice } from 'src/Domaine/Types/exercice.interface';
 
 @Controller('exercice')
 @ApiTags('exercice')
@@ -18,7 +19,7 @@ export class ExerciceController {
 
   @Get()
   @ApiOkResponse({ description: 'success' })
-  async getAllExercices(): Promise<ExerciceModel[]> {
+  async getAllExercices(): Promise<IExercice[]> {
     return this._exerciceService.findAllExercice();
   }
 
@@ -27,7 +28,7 @@ export class ExerciceController {
   @ApiOkResponse({ description: 'success' })
   async getByBodyPart(
     @Param('bodyPart') bodyPart: string,
-  ): Promise<ExerciceModel[]> {
+  ): Promise<IExercice[]> {
     const exercice = await this._exerciceService.findByBodyPart(bodyPart);
     if (exercice.length) return exercice;
     else throw new ExerciceNotFoundException();
@@ -35,14 +36,14 @@ export class ExerciceController {
 
   @Get('getByLevel/:level')
   @ApiOkResponse({ description: 'success' })
-  async getByLevel(@Param('level') level: number): Promise<ExerciceModel[]> {
+  async getByLevel(@Param('level') level: number): Promise<IExercice[]> {
     return this._exerciceService.findByLevel(level);
   }
 
   @Post()
   @ApiCreatedResponse({ description: 'Exercice created' })
-  @ApiBody({ type: createExerciceDto })
-  async postExercice(@Body() exercice: ExerciceModel): Promise<void> {
+  @ApiBody({ type: CreateExerciceSchema })
+  async postExercice(@Body() exercice: createExerciceDto): Promise<void> {
     this._exerciceService.createExercice(exercice);
   }
 }

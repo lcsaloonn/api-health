@@ -1,4 +1,4 @@
-import { IBodyPart } from 'src/Domaine/models/exercice.model';
+import { IBodyPart } from 'src/modules/exercice/model/exercice.model';
 
 export class readExerciceDto {
   _id: string;

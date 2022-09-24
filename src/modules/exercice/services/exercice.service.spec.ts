@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import httpMocks from 'node-mocks-http';
-import { ExerciceModel } from 'src/Domaine/models/exercice.model';
+import { ExerciceModel } from 'src/modules/exercice/model/exercice.model';
 import { ExerciceRepository } from 'src/Infrastructure/repository/exercice.repository';
 import { ExerciceService } from '../services/exerice.service';
 
