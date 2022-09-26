@@ -11,7 +11,7 @@ import { JwtAuthGuard } from 'src/Application/auth/Guards/jwt.guard';
 import { RolesGuard } from 'src/Application/auth/Guards/roles.guard';
 import { UserSecurityService } from 'src/Application/auth/services/security-services/user-sercurity.service';
 import { UserRole } from 'src/Domaine/Enums/roles.enums';
-import { UserModel } from 'src/Domaine/models/user.model';
+import { UserModel } from 'src/modules/model/user.model';
 import { CreateUserDto } from '../Dto/createUser.dto';
 import { UserService } from '../services/user.service';
 

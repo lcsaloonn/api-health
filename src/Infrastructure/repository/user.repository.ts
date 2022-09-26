@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { ObjectId } from 'mongodb';
 import { IGenericRepository } from 'src/Infrastructure/repository/abstract/generic-repository.abstract';
 import { MongoDb } from 'src/Infrastructure/DataBase/db.connection';
-import { UserModel } from 'src/Domaine/models/user.model';
+import { UserModel } from 'src/modules/model/user.model';
 
 @Injectable()
 export class UserRepository implements IGenericRepository<UserModel> {

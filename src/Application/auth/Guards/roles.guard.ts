@@ -6,7 +6,7 @@ import {
   forwardRef,
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
-import { UserModel } from 'src/Domaine/models/user.model';
+import { UserModel } from 'src/modules/model/user.model';
 import { UserService } from 'src/modules/User/services/user.service';
 import { UserSecurityService } from '../services/security-services/user-sercurity.service';
 

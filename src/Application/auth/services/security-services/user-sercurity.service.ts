@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { ObjectId } from 'mongodb';
 import { UserRole } from 'src/Domaine/Enums/roles.enums';
-import { UserModel } from 'src/Domaine/models/user.model';
+import { UserModel } from 'src/modules/model/user.model';
 import { UserRepository } from 'src/Infrastructure/repository/user.repository';
 import { CreateUserDto } from 'src/modules/User/Dto/createUser.dto';
 import { AuthService } from '../auth/auth.service';
@@ -27,7 +27,7 @@ export class UserSecurityService {
       return 'username incorect';
     } else {
       const hashPassword = await this.authService.hashPassword(user.password);
-      const newUser = new UserModel(user.username, hashPassword, UserRole.USER);
+      const newUser = new UserModel(user.username, hashPassword);
       this._userRepository.create(newUser);
       return 'is created';
     }
