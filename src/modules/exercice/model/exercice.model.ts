@@ -15,21 +15,21 @@ export class ExerciceModel implements IExercice {
   description: string;
   raiting: number;
   bodyPart: IBodyPart;
-  imgaeUrl: string;
+  imageUrl: string;
 
   constructor(
     title: string,
     description: string,
     raiting: number,
     bodyPart: IBodyPart,
-    imgaeUrl: string,
+    imageUrl: string,
   ) {
     this._id = new ObjectId();
     this.title = title;
     this.description = description;
     this.raiting = raiting;
     this.bodyPart = bodyPart;
-    this.imgaeUrl = imgaeUrl;
+    this.imageUrl = imageUrl;
   }
 
   private set setRaiting(raiting: number) {

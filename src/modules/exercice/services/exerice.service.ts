@@ -38,6 +38,9 @@ export class ExerciceService {
     return this._exerciceRepository.find(data);
   }
 
+  //find all bodypart (returns all bodyPart envolved in an exercices)
+
+  // A tester
   async findBySort(): Promise<IExercice[]> {
     const exercices = await this._exerciceRepository.find();
     const sorted = this.sortAlgorithm.sortAlphabetical(exercices);
@@ -55,7 +58,7 @@ export class ExerciceService {
         exercice.description,
         exercice.raiting,
         exercice.bodyPart,
-        exercice.imgaeUrl,
+        exercice.imageUrl,
       ),
     );
   }

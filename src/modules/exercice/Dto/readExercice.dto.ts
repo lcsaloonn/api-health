@@ -6,5 +6,5 @@ export class readExerciceDto {
   description: string;
   raiting: number;
   bodyPart: IBodyPart;
-  imgaeUrl: string;
+  imageUrl: string;
 }

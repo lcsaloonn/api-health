@@ -12,8 +12,8 @@ import { ExerciceService } from '../services/exerice.service';
 import { CreateExerciceSchema } from '../schema/exercice.schema';
 import { IExercice } from 'src/Domaine/Types/exercice.interface';
 
-@Controller('exercice')
-@ApiTags('exercice')
+@Controller('exercices')
+@ApiTags('exercices')
 export class ExerciceController {
   constructor(private readonly _exerciceService: ExerciceService) {}
 

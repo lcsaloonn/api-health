@@ -9,5 +9,5 @@ export class createExerciceDto {
 
   bodyPart: IBodyPart;
 
-  imgaeUrl: string;
+  imageUrl: string;
 }

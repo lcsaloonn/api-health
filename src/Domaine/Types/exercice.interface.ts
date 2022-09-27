@@ -7,5 +7,5 @@ export interface IExercice {
   description: string;
   raiting: number;
   bodyPart: IBodyPart;
-  imgaeUrl: string;
+  imageUrl: string;
 }
