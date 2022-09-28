@@ -32,10 +32,18 @@ export class ExerciceModel implements IExercice {
     this.imageUrl = imageUrl;
   }
 
-  private set setRaiting(raiting: number) {
+  set setRaiting(raiting: number) {
     if (raiting > 5) {
       throw new Error('invalid raiting');
     }
     this.raiting = raiting;
+  }
+
+  set setBodyPart(bodyPart: IBodyPart) {
+    if (Object.values(IBodyPart).includes(bodyPart)) {
+      throw new Error('invalid body part');
+    } else {
+      this.bodyPart = bodyPart;
+    }
   }
 }

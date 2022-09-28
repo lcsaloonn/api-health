@@ -25,5 +25,5 @@ export class CreateExerciceSchema {
     description: 'urlImage',
     example: 'face-pull-exercice-epaules.jpg',
   })
-  imgaeUrl: string;
+  imageUrl: string;
 }

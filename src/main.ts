@@ -1,3 +1,4 @@
+import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
@@ -7,6 +8,9 @@ const port = process.env.PORT || 3001;
 async function bootstrap() {
   await MongoDb.instance.connect();
   const app = await NestFactory.create(AppModule);
+
+  //PIPES
+  app.useGlobalPipes(new ValidationPipe());
 
   //SWAGER
   const config = new DocumentBuilder()

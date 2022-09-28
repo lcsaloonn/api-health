@@ -13,6 +13,7 @@ import { CreateExerciceSchema } from '../schema/exercice.schema';
 import { IExercice } from 'src/Domaine/Types/exercice.interface';
 
 @Controller('exercices')
+@UseFilters(HttpExceptionFilter)
 @ApiTags('exercices')
 export class ExerciceController {
   constructor(private readonly _exerciceService: ExerciceService) {}
@@ -23,7 +24,6 @@ export class ExerciceController {
     return this._exerciceService.findAllExercice();
   }
 
-  @UseFilters(HttpExceptionFilter)
   @Get('getByBodyPart/:bodyPart')
   @ApiOkResponse({ description: 'success' })
   async getByBodyPart(
