@@ -34,6 +34,12 @@ export class ExerciceController {
     else throw new ExerciceNotFoundException();
   }
 
+  @Get('getByName/:title')
+  @ApiOkResponse({ description: 'success' })
+  async getByName(@Param('title') title: string): Promise<IExercice[]> {
+    return this._exerciceService.findByName(title);
+  }
+
   @Get('getByLevel/:level')
   @ApiOkResponse({ description: 'success' })
   async getByLevel(@Param('level') level: number): Promise<IExercice[]> {

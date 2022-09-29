@@ -38,6 +38,13 @@ export class ExerciceService {
     return this._exerciceRepository.find(data);
   }
 
+  async findByName(title: string): Promise<IExercice[]> {
+    const data = {
+      title: title,
+    };
+    return this._exerciceRepository.find(data);
+  }
+
   //find all bodypart (returns all bodyPart envolved in an exercices)
 
   // A tester
