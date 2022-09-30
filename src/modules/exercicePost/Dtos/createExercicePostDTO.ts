@@ -4,15 +4,14 @@ import {
   IsMongoId,
   IsNotEmpty,
   IsString,
-  Validate,
 } from 'class-validator';
 import { ByStepText } from 'src/Domaine/Types/IExercicePost.interface';
-import { ExerciceExistRule } from 'src/Pipes/custom-validator/isExerciceIdExist.pipe';
+import { ExerciceExistFilter } from 'src/filters/exerciceExist.filter';
 
 export class CreateExercicePostDTO {
   @IsNotEmpty()
   @IsMongoId()
-  @Validate(ExerciceExistRule)
+  @ExerciceExistFilter()
   idExercice: string;
 
   @IsNotEmpty()
