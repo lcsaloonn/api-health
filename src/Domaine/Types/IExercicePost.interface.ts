@@ -1,14 +1,10 @@
 import { ObjectId } from 'mongodb';
-
-export type ByStepText = {
-  stepNumber: number;
-  text: string;
-};
+import { ContentModel } from '../models/content.model';
 
 export interface IExercicePost {
   _id: ObjectId;
   idExercice: ObjectId;
   description: string;
-  howToRealise: ByStepText[];
+  howToRealise: ContentModel[];
   advice: string[];
 }

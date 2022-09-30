@@ -1,20 +1,18 @@
 import { ObjectId } from 'mongodb';
-import {
-  ByStepText,
-  IExercicePost,
-} from 'src/Domaine/Types/IExercicePost.interface';
+import { ContentModel } from 'src/Domaine/models/content.model';
+import { IExercicePost } from 'src/Domaine/Types/IExercicePost.interface';
 
 export class ExercicePostModel implements IExercicePost {
   _id: ObjectId;
   idExercice: ObjectId;
   description: string;
-  howToRealise: ByStepText[];
+  howToRealise: ContentModel[];
   advice: string[];
 
   constructor(
     idExercice: string,
     description: string,
-    howToRealise: ByStepText[],
+    howToRealise: ContentModel[],
     advice: string[],
   ) {
     this._id = new ObjectId();
