@@ -1,5 +1,5 @@
 import { ObjectID } from 'bson';
-import { UserRole } from '../../Domaine/Enums/roles.enums';
+import { UserRole } from '../../../Domaine/Enums/roles.enums';
 
 export class UserModel {
   _id: ObjectID;

@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { ObjectId } from 'mongodb';
 import { UserRole } from 'src/Domaine/Enums/roles.enums';
-import { UserModel } from 'src/modules/model/user.model';
+import { UserModel } from 'src/modules/User/model/user.model';
 import { UserRepository } from 'src/Infrastructure/repository/user.repository';
 import { CreateUserDto } from 'src/modules/User/Dto/createUser.dto';
 import { AuthService } from '../auth/auth.service';
