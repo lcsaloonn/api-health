@@ -8,6 +8,7 @@ import { IExercice } from 'src/Domaine/Types/exercice.interface';
 @Injectable()
 export class ExerciceRepository implements IGenericRepository<IExercice> {
   public connection = MongoDb.instance.db.collection('exercice');
+
   async findOne(id: string): Promise<IExercice> {
     return await this.connection.findOne<IExercice>({
       _id: new ObjectId(id),
