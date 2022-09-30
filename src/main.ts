@@ -1,6 +1,7 @@
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { useContainer } from 'class-validator';
 import { AppModule } from './app.module';
 import { MongoDb } from './Infrastructure/DataBase/db.connection';
 const port = process.env.PORT || 3001;
@@ -8,6 +9,9 @@ const port = process.env.PORT || 3001;
 async function bootstrap() {
   await MongoDb.instance.connect();
   const app = await NestFactory.create(AppModule);
+
+  //to enable class validator to have injectable
+  useContainer(app.select(AppModule), { fallbackOnErrors: true });
 
   //PIPES
   app.useGlobalPipes(new ValidationPipe());
