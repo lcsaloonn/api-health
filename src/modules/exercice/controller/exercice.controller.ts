@@ -6,7 +6,7 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { ExerciceNotFoundException } from 'src/exceptions/exercice.exceptions';
-import { HttpExceptionFilter } from 'src/exceptions/filters/httpException.filter';
+import { HttpExceptionFilter } from 'src/filters/httpException.filter';
 import { createExerciceDto } from '../Dto/createExercice.dto';
 import { ExerciceService } from '../services/exerice.service';
 import { CreateExerciceSchema } from '../schema/exercice.schema';
@@ -22,6 +22,12 @@ export class ExerciceController {
   @ApiOkResponse({ description: 'success' })
   async getAllExercices(): Promise<IExercice[]> {
     return this._exerciceService.findAllExercice();
+  }
+
+  @Get('getById/:id')
+  @ApiOkResponse({ description: 'success' })
+  async getById(@Param('id') id: string): Promise<IExercice> {
+    return await this._exerciceService.findById(id);
   }
 
   @Get('getByBodyPart/:bodyPart')

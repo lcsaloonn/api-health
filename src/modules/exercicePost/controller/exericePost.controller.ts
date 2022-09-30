@@ -1,6 +1,6 @@
 import { Body, Controller, Post, UseFilters } from '@nestjs/common';
 import { ApiBody, ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
-import { HttpExceptionFilter } from 'src/exceptions/filters/httpException.filter';
+import { HttpExceptionFilter } from 'src/filters/httpException.filter';
 import { CreateExercicePostDTO } from '../Dtos/createExercicePostDTO';
 import { CreateExercicePostSchema } from '../schema/CreateExercicePost.schema';
 import { ExercicePostService } from '../service/exercicePost.service';
