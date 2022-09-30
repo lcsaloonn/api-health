@@ -12,15 +12,13 @@ export class CreateExercicePostSchema {
   description: string;
 
   @ApiProperty({
-    type: String,
     isArray: true,
     description: 'howToRealise',
-    example: [''],
+    example: [{ id: 1, text: '' }],
   })
   howToRealise: string[];
 
   @ApiProperty({
-    type: String,
     isArray: true,
     description: 'advice',
     example: [''],
