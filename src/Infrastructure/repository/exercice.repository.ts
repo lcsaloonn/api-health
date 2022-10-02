@@ -15,6 +15,10 @@ export class ExerciceRepository implements IGenericRepository<IExercice> {
     });
   }
 
+  async findOneByData(key: string | number, data: any): Promise<IExercice> {
+    return await this.connection.findOne<IExercice>({ [key]: data });
+  }
+
   async find(options?: any): Promise<IExercice[]> {
     return await this.connection.find<IExercice>(options).toArray();
   }
