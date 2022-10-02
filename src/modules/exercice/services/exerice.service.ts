@@ -40,7 +40,7 @@ export class ExerciceService {
 
   async findByName(title: string): Promise<IExercice[]> {
     const data = {
-      title: title,
+      idTitle: title,
     };
     return this._exerciceRepository.find(data);
   }
