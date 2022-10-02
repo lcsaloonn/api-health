@@ -1,4 +1,5 @@
 import { ObjectId } from 'mongodb';
+import { replaceSpaceByhyphen } from 'src/Application/util/utilText/textUtil';
 import { IExercice } from '../../../Domaine/Types/exercice.interface';
 
 export enum IBodyPart {
@@ -12,6 +13,7 @@ export enum IBodyPart {
 export class ExerciceModel implements IExercice {
   _id: ObjectId;
   title: string;
+  idTitle: string;
   description: string;
   raiting: number;
   bodyPart: IBodyPart;
@@ -30,6 +32,7 @@ export class ExerciceModel implements IExercice {
     this.raiting = raiting;
     this.bodyPart = bodyPart;
     this.imageUrl = imageUrl;
+    this.idTitle = replaceSpaceByhyphen(title);
   }
 
   set setRaiting(raiting: number) {
