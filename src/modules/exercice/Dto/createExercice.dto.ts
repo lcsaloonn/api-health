@@ -5,12 +5,16 @@ import {
   IsString,
   Max,
   Min,
+  Validate,
 } from 'class-validator';
 import { IBodyPart } from 'src/modules/exercice/model/exercice.model';
+import { DataExistRule } from 'src/Pipes/custom-validator/isDataExist.pipe';
 
 export class createExerciceDto {
+  // ne doigt pas deja exister
   @IsNotEmpty()
   @IsString()
+  @Validate(DataExistRule)
   title: string;
 
   @IsNotEmpty()
