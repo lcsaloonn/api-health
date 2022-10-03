@@ -11,12 +11,19 @@ import {
 import { ContentModel } from 'src/Domaine/models/content.model';
 import { ExerciceExistFilter } from 'src/filters/exerciceExist.filter';
 import { ArrayRule } from 'src/Pipes/custom-validator/isArrayTypeOf.pipe';
+import { DataExistRule } from 'src/Pipes/custom-validator/isDataExist.pipe';
+import { DataRelatedToIdRule } from 'src/Pipes/custom-validator/isDataRelatedToId.pipe';
 
 export class CreateExercicePostDTO {
   @IsNotEmpty()
   @IsMongoId()
   @ExerciceExistFilter()
   idExercice: string;
+
+  @IsNotEmpty()
+  @IsString()
+  @Validate(DataRelatedToIdRule)
+  idTitle: string;
 
   @IsNotEmpty()
   @IsString()

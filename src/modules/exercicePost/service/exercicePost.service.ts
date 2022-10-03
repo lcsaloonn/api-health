@@ -14,6 +14,7 @@ export class ExercicePostService {
     this._exercicePostRespository.create(
       new ExercicePostModel(
         post.idExercice,
+        post.idTitle,
         post.description,
         post.howToRealise,
         post.advice,

@@ -6,6 +6,13 @@ export class CreateExercicePostSchema {
 
   @ApiProperty({
     type: String,
+    description: 'idTitle',
+    example: 'idTitle',
+  })
+  title: string;
+
+  @ApiProperty({
+    type: String,
     description: 'description',
     example: 'blablabla',
   })
