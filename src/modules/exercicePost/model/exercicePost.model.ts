@@ -5,6 +5,7 @@ import { IExercicePost } from 'src/Domaine/Types/IExercicePost.interface';
 export class ExercicePostModel implements IExercicePost {
   _id: ObjectId;
   idExercice: ObjectId;
+  imgUrl: string;
   description: string;
   howToRealise: ContentModel[];
   advice: string[];
@@ -14,11 +15,13 @@ export class ExercicePostModel implements IExercicePost {
     description: string,
     howToRealise: ContentModel[],
     advice: string[],
+    imgUrl: string,
   ) {
     this._id = new ObjectId();
     this.idExercice = new ObjectId(idExercice);
     this.description = description;
     this.howToRealise = howToRealise;
     this.advice = advice;
+    this.imgUrl = imgUrl;
   }
 }

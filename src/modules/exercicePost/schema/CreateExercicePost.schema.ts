@@ -24,4 +24,11 @@ export class CreateExercicePostSchema {
     example: [''],
   })
   advice: string[];
+
+  @ApiProperty({
+    type: String,
+    description: 'imgUrl',
+    example: 'url',
+  })
+  imgUrl: string;
 }

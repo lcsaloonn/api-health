@@ -33,4 +33,8 @@ export class CreateExercicePostDTO {
   @IsString({ each: true })
   @ArrayMinSize(1)
   advice: string[];
+
+  @IsNotEmpty()
+  @IsString()
+  imgUrl: string;
 }

@@ -17,6 +17,7 @@ export class ExercicePostService {
         post.description,
         post.howToRealise,
         post.advice,
+        post.imgUrl,
       ),
     );
   }
