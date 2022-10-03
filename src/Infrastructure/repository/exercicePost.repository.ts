@@ -15,6 +15,11 @@ export class ExercicePostRepository
   findOne(id: string): Promise<IExercicePost> {
     throw new Error('Method not implemented.');
   }
+
+  async findOneByData(key: string | number, data: any): Promise<IExercicePost> {
+    return await this.connection.findOne<IExercicePost>({ [key]: data });
+  }
+
   async create(post: IExercicePost): Promise<void> {
     await this.connection.insertOne(post);
   }

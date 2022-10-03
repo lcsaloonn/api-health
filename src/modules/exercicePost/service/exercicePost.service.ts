@@ -1,4 +1,6 @@
 import { Injectable } from '@nestjs/common';
+import { IExercicePost } from 'src/Domaine/Types/IExercicePost.interface';
+import { NotFoundException } from 'src/exceptions/notFound.exceptions';
 import { ExercicePostRepository } from 'src/Infrastructure/repository/exercicePost.repository';
 import { CreateExercicePostDTO } from '../Dtos/createExercicePostDTO';
 import { ExercicePostModel } from '../model/exercicePost.model';
@@ -21,5 +23,16 @@ export class ExercicePostService {
         post.imgUrl,
       ),
     );
+  }
+  /**
+   * FIND
+   */
+  async findExercicePostByName(data: string): Promise<IExercicePost> {
+    const post = await this._exercicePostRespository.findOneByData(
+      'idTitle',
+      data,
+    );
+    if (post) return post;
+    else throw new NotFoundException();
   }
 }

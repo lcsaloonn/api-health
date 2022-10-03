@@ -5,7 +5,7 @@ import {
   ApiOkResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import { ExerciceNotFoundException } from 'src/exceptions/exercice.exceptions';
+import { NotFoundException } from 'src/exceptions/notFound.exceptions';
 import { HttpExceptionFilter } from 'src/filters/httpException.filter';
 import { createExerciceDto } from '../Dto/createExercice.dto';
 import { ExerciceService } from '../services/exerice.service';
@@ -37,7 +37,7 @@ export class ExerciceController {
   ): Promise<IExercice[]> {
     const exercice = await this._exerciceService.findByBodyPart(bodyPart);
     if (exercice.length) return exercice;
-    else throw new ExerciceNotFoundException();
+    else throw new NotFoundException();
   }
 
   @Get('getByName/:title')
