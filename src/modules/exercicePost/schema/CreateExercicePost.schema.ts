@@ -9,7 +9,7 @@ export class CreateExercicePostSchema {
     description: 'idTitle',
     example: 'idTitle',
   })
-  title: string;
+  idTitle: string;
 
   @ApiProperty({
     type: String,
