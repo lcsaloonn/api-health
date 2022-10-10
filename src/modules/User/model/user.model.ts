@@ -1,7 +1,8 @@
 import { ObjectID } from 'bson';
+import { IUser } from 'src/Domaine/Types/IUser.interface';
 import { UserRole } from '../../../Domaine/Enums/roles.enums';
 
-export class UserModel {
+export class UserModel implements IUser {
   _id: ObjectID;
   username: string;
   password: string;
