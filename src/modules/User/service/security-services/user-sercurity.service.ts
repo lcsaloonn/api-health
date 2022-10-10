@@ -1,10 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { ObjectId } from 'mongodb';
-import { UserRole } from 'src/Domaine/Enums/roles.enums';
 import { UserModel } from 'src/modules/User/model/user.model';
 import { UserRepository } from 'src/Infrastructure/repository/user.repository';
 import { CreateUserDto } from 'src/modules/User/Dto/createUser.dto';
-import { AuthService } from '../auth/auth.service';
+import { AuthService } from '../../../../Application/auth/services/auth/auth.service';
+import {
+  LoginResponse,
+  UserResponseType,
+} from 'src/Domaine/Types/userType/userType';
+import { UserResponse } from 'src/Domaine/Enums/response.enum';
 
 @Injectable()
 export class UserSecurityService {
@@ -16,20 +20,22 @@ export class UserSecurityService {
   /**
    * Ameliorations
    *  -move fonction verifyRegisterData
-   *  - better error response
-   *  - gestion des cas dans le if à opti
    */
-  async createUser(user: UserModel): Promise<string> {
+  async createUser(user: UserModel): Promise<UserResponseType> {
     const userfind: UserModel = await this.findByUsername(user.username);
-    if (!this.authService.verifyRegisterData(user)) {
-      return 'password or username incorect';
-    } else if (userfind != null) {
-      return 'username incorect';
+    if (!this.authService.verifyRegisterData(user) || userfind != null) {
+      return {
+        response: UserResponse.ERROR,
+        msg: 'username or password incorect',
+      };
     } else {
       const hashPassword = await this.authService.hashPassword(user.password);
       const newUser = new UserModel(user.username, hashPassword);
       this._userRepository.create(newUser);
-      return 'is created';
+      return {
+        response: UserResponse.SUCCESS,
+        msg: 'user created',
+      };
     }
   }
 

@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UserModel } from 'src/modules/User/model/user.model';
-import { CreateUserDto } from 'src/modules/User/Dto/createUser.dto';
 import { ReadUserDto } from 'src/modules/User/Dto/readUser.dto';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires

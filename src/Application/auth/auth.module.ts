@@ -2,13 +2,13 @@ import { Module, forwardRef } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { UserModule } from 'src/modules/User/user.module';
-import { UserService } from 'src/modules/User/services/user.service';
+import { UserService } from 'src/modules/User/service/user.service';
 
 import { AuthService } from './services/auth/auth.service';
 import { JwtStrategy } from './Guards/jwt-strategy';
 import { JwtAuthGuard } from './Guards/jwt.guard';
 import { RolesGuard } from './Guards/roles.guard';
-import { UserSecurityService } from './services/security-services/user-sercurity.service';
+import { UserSecurityService } from '../../modules/User/service/security-services/user-sercurity.service';
 import { ExerciceRepository } from 'src/Infrastructure/repository/exercice.repository';
 import { UserRepository } from 'src/Infrastructure/repository/user.repository';
 /**

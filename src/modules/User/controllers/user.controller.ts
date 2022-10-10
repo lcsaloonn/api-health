@@ -9,11 +9,15 @@ import {
 import { hasRoles } from 'src/Application/auth/decorators/roles.decorator';
 import { JwtAuthGuard } from 'src/Application/auth/Guards/jwt.guard';
 import { RolesGuard } from 'src/Application/auth/Guards/roles.guard';
-import { UserSecurityService } from 'src/Application/auth/services/security-services/user-sercurity.service';
+import { UserSecurityService } from 'src/modules/User/service/security-services/user-sercurity.service';
 import { UserRole } from 'src/Domaine/Enums/roles.enums';
+import {
+  LoginResponse,
+  UserResponseType,
+} from 'src/Domaine/Types/userType/userType';
 import { UserModel } from 'src/modules/User/model/user.model';
 import { CreateUserDto } from '../Dto/createUser.dto';
-import { UserService } from '../services/user.service';
+import { UserService } from '../service/user.service';
 
 @Controller('user')
 @ApiTags('user')
@@ -23,10 +27,10 @@ export class UserController {
     private userSecurityService: UserSecurityService,
   ) {}
 
-  @Post()
+  @Post('register')
   @ApiCreatedResponse({ description: 'User created' })
   @ApiBody({ type: CreateUserDto })
-  async createUser(@Body() user: UserModel): Promise<string> {
+  async createUser(@Body() user: UserModel): Promise<UserResponseType> {
     return this.userSecurityService.createUser(user);
   }
 
