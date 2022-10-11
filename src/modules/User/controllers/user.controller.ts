@@ -28,12 +28,8 @@ export class UserController {
   ) {}
 
   @Post('register')
-  @ApiResponse({
-    status: 201,
-    description: 'register is success',
-  })
   @ApiBody({ type: CreateUserSchema })
-  async createUser(@Body() user: CreateUserDto): Promise<void> {
+  async createUser(@Body() user: CreateUserDto): Promise<LoginResponse> {
     return this.userSecurityService.createUser(user);
   }
 

@@ -13,10 +13,11 @@ export class UserSecurityService {
     private authService: AuthService,
   ) {}
 
-  async createUser(user: CreateUserDto): Promise<void> {
+  async createUser(user: CreateUserDto): Promise<LoginResponse> {
     const hashPassword = await this.authService.hashPassword(user.password);
     const newUser = new UserModel(user.username, hashPassword);
     this._userRepository.create(newUser);
+    return { isSuccess: true };
   }
 
   async findById(userId: string | ObjectId): Promise<UserModel> {
