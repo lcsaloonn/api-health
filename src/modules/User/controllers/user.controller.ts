@@ -2,8 +2,8 @@ import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import {
   ApiBearerAuth,
   ApiBody,
-  ApiCreatedResponse,
   ApiOkResponse,
+  ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
 import { hasRoles } from 'src/Application/auth/decorators/roles.decorator';
@@ -11,13 +11,12 @@ import { JwtAuthGuard } from 'src/Application/auth/Guards/jwt.guard';
 import { RolesGuard } from 'src/Application/auth/Guards/roles.guard';
 import { UserSecurityService } from 'src/modules/User/service/security-services/user-sercurity.service';
 import { UserRole } from 'src/Domaine/Enums/roles.enums';
-import {
-  LoginResponse,
-  UserResponseType,
-} from 'src/Domaine/Types/userType/userType';
+import { LoginResponse } from 'src/Domaine/Types/userType/userType';
 import { UserModel } from 'src/modules/User/model/user.model';
 import { CreateUserDto } from '../Dto/createUser.dto';
 import { UserService } from '../service/user.service';
+import { CreateUserSchema } from '../schema/CreateUser.schema';
+import { IUser } from 'src/Domaine/Types/IUser.interface';
 
 @Controller('user')
 @ApiTags('user')
@@ -28,9 +27,12 @@ export class UserController {
   ) {}
 
   @Post('register')
-  @ApiCreatedResponse({ description: 'User created' })
-  @ApiBody({ type: CreateUserDto })
-  async createUser(@Body() user: UserModel): Promise<UserResponseType> {
+  @ApiResponse({
+    status: 201,
+    description: 'register is success',
+  })
+  @ApiBody({ type: CreateUserSchema })
+  async createUser(@Body() user: CreateUserDto): Promise<void> {
     return this.userSecurityService.createUser(user);
   }
 

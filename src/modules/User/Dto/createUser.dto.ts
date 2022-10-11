@@ -1,8 +1,13 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { IsNotEmpty, IsString, Validate } from 'class-validator';
+import { UserExistsPipe } from 'src/Pipes/custom-validator/user/isUserExist.pipe';
 
 export class CreateUserDto {
-  @ApiProperty({ type: String, description: 'username', example: 'thomas' })
+  @IsNotEmpty()
+  @IsString()
+  @Validate(UserExistsPipe)
   username: string;
-  @ApiProperty({ type: String, description: 'password', example: 'Thomas55*' })
+
+  @IsNotEmpty()
+  @IsString()
   password: string;
 }
