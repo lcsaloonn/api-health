@@ -1,10 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { map } from 'rxjs';
-import { AuthService } from 'src/Application/auth/services/auth/auth.service';
-
 import { UserModel } from 'src/modules/User/model/user.model';
 import { UserRepository } from 'src/Infrastructure/repository/user.repository';
-import { CreateUserDto } from '../Dto/createUser.dto';
 
 @Injectable()
 export class UserService {
