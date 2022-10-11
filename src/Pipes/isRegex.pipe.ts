@@ -29,6 +29,6 @@ export class IsRegexPipe implements ValidatorConstraintInterface {
     return regex.test(username);
   }
   defaultMessage?(validationArguments?: ValidationArguments): string {
-    return 'username is not good';
+    return `${validationArguments.property} is not good`;
   }
 }
