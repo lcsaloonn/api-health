@@ -16,7 +16,8 @@ import { UserModel } from 'src/modules/User/model/user.model';
 import { CreateUserDto } from '../Dto/createUser.dto';
 import { UserService } from '../service/user.service';
 import { CreateUserSchema } from '../schema/CreateUser.schema';
-import { IUser } from 'src/Domaine/Types/IUser.interface';
+import { ReadUserSchema } from '../schema/ReadUser.schema';
+import { ReadUserDto } from '../Dto/readUser.dto';
 
 @Controller('user')
 @ApiTags('user')
@@ -37,8 +38,8 @@ export class UserController {
   }
 
   @Post('login')
-  @ApiBody({ type: CreateUserDto })
-  async login(@Body() user: CreateUserDto): Promise<LoginResponse> {
+  @ApiBody({ type: ReadUserSchema })
+  async login(@Body() user: ReadUserDto): Promise<LoginResponse> {
     return this.userSecurityService.login(user);
   }
 

@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { UserModel } from 'src/modules/User/model/user.model';
+import { ObjectId } from 'mongodb';
+import { UserRole } from 'src/Domaine/Enums/roles.enums';
 import { ReadUserDto } from 'src/modules/User/Dto/readUser.dto';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -10,7 +11,8 @@ const bcrypt = require('bcrypt');
 export class AuthService {
   constructor(private readonly jwtService: JwtService) {}
 
-  generateJWT(user: ReadUserDto): Promise<string> {
+  generateJWT(id: ObjectId, username: string, role: UserRole): Promise<string> {
+    const user = { id, username, role };
     return this.jwtService.signAsync({ user });
   }
 
@@ -20,20 +22,5 @@ export class AuthService {
 
   comparePasswords(newPassword: string, passwordHash: string): boolean {
     return bcrypt.compare(newPassword, passwordHash);
-  }
-
-  verifyRegisterData(userData: UserModel): boolean {
-    const passwordRegex = new RegExp(
-      '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})',
-    );
-    const userNameRegex = new RegExp('^[a-zA-Z0-9]+$');
-    if (
-      userData.password.match(passwordRegex) &&
-      userData.username.match(userNameRegex)
-    ) {
-      return true;
-    } else {
-      return false;
-    }
   }
 }

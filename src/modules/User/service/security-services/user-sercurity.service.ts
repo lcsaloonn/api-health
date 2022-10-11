@@ -13,10 +13,6 @@ export class UserSecurityService {
     private authService: AuthService,
   ) {}
 
-  /**
-   * Ameliorations
-   *  -move fonction verifyRegisterData
-   */
   async createUser(user: CreateUserDto): Promise<void> {
     const hashPassword = await this.authService.hashPassword(user.password);
     const newUser = new UserModel(user.username, hashPassword);
@@ -32,27 +28,20 @@ export class UserSecurityService {
     return this._userRepository.findOneBy(data);
   }
 
-  /**
-   *
-   * A refactor logique
-   * 2x appel method userfind
-   * creation d'un type inutile
-   */
   async login(user: CreateUserDto): Promise<LoginResponse> {
-    const isValidate: boolean = await this.ValidateUser(
-      user.username,
-      user.password,
-    );
+    const {
+      isGoodPassword,
+      userfind,
+    }: { isGoodPassword: boolean; userfind: UserModel } =
+      await this.ValidateUser(user.username, user.password);
 
-    if (isValidate) {
-      const userfind: UserModel = await this.findByUsername(user.username);
-      const readUser = {
-        _id: userfind._id,
-        username: userfind.username,
-        role: userfind.role,
-      };
+    if (isGoodPassword) {
       return {
-        token: await this.authService.generateJWT(readUser),
+        token: await this.authService.generateJWT(
+          userfind._id,
+          userfind.username,
+          userfind.role,
+        ),
         isSuccess: true,
       };
     } else {
@@ -62,25 +51,16 @@ export class UserSecurityService {
     }
   }
 
-  async ValidateUser(username: string, password: string): Promise<boolean> {
+  async ValidateUser(username: string, password: string) {
     try {
       const userfind: UserModel = await this.findByUsername(username);
       const isGoodPassword = this.authService.comparePasswords(
         password,
         userfind.password,
       );
-      return isGoodPassword;
-    } catch {
-      return false;
-    }
-  }
-
-  isDuplicationPseudo(username: string): boolean {
-    try {
-      this.findByUsername(username);
-      return true;
-    } catch {
-      return false;
+      return { isGoodPassword, userfind };
+    } catch (e) {
+      throw Error(e);
     }
   }
 }
