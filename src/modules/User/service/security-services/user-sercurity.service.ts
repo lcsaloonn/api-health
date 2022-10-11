@@ -4,11 +4,7 @@ import { UserModel } from 'src/modules/User/model/user.model';
 import { UserRepository } from 'src/Infrastructure/repository/user.repository';
 import { CreateUserDto } from 'src/modules/User/Dto/createUser.dto';
 import { AuthService } from '../../../../Application/auth/services/auth/auth.service';
-import {
-  LoginResponse,
-  UserResponseType,
-} from 'src/Domaine/Types/userType/userType';
-import { UserResponse } from 'src/Domaine/Enums/response.enum';
+import { LoginResponse } from 'src/Domaine/Types/userType/userType';
 
 @Injectable()
 export class UserSecurityService {
@@ -21,22 +17,10 @@ export class UserSecurityService {
    * Ameliorations
    *  -move fonction verifyRegisterData
    */
-  async createUser(user: UserModel): Promise<UserResponseType> {
-    const userfind: UserModel = await this.findByUsername(user.username);
-    if (!this.authService.verifyRegisterData(user) || userfind != null) {
-      return {
-        response: UserResponse.ERROR,
-        msg: 'username or password incorect',
-      };
-    } else {
-      const hashPassword = await this.authService.hashPassword(user.password);
-      const newUser = new UserModel(user.username, hashPassword);
-      this._userRepository.create(newUser);
-      return {
-        response: UserResponse.SUCCESS,
-        msg: 'user created',
-      };
-    }
+  async createUser(user: CreateUserDto): Promise<void> {
+    const hashPassword = await this.authService.hashPassword(user.password);
+    const newUser = new UserModel(user.username, hashPassword);
+    this._userRepository.create(newUser);
   }
 
   async findById(userId: string | ObjectId): Promise<UserModel> {
