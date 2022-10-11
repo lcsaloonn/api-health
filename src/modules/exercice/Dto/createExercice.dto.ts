@@ -8,10 +8,9 @@ import {
   Validate,
 } from 'class-validator';
 import { IBodyPart } from 'src/modules/exercice/model/exercice.model';
-import { DataExistRule } from 'src/Pipes/custom-validator/isDataExist.pipe';
+import { DataExistRule } from 'src/Pipes/isDataExist.pipe';
 
 export class createExerciceDto {
-  // ne doigt pas deja exister
   @IsNotEmpty()
   @IsString()
   @Validate(DataExistRule)

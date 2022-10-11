@@ -1,5 +1,5 @@
 import { IsNotEmpty, IsString, Validate } from 'class-validator';
-import { UserExistsPipe } from 'src/Pipes/custom-validator/user/isUserExist.pipe';
+import { UserExistsPipe } from 'src/Pipes/user/isUserExist.pipe';
 
 export class CreateUserDto {
   @IsNotEmpty()

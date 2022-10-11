@@ -10,9 +10,8 @@ import {
 } from 'class-validator';
 import { ContentModel } from 'src/Domaine/models/content.model';
 import { ExerciceExistFilter } from 'src/filters/exerciceExist.filter';
-import { ArrayRule } from 'src/Pipes/custom-validator/isArrayTypeOf.pipe';
-import { DataExistRule } from 'src/Pipes/custom-validator/isDataExist.pipe';
-import { DataRelatedToIdRule } from 'src/Pipes/custom-validator/isDataRelatedToId.pipe';
+import { ArrayRule } from 'src/Pipes/isArrayTypeOf.pipe';
+import { DataRelatedToIdRule } from 'src/Pipes/isDataRelatedToId.pipe';
 
 export class CreateExercicePostDTO {
   @IsNotEmpty()
