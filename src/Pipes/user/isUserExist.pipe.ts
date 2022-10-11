@@ -15,9 +15,8 @@ export class UserExistsPipe implements ValidatorConstraintInterface {
     try {
       const user = await this._userService.findByUsername(value);
       if (user) return false;
-    } catch (e) {
-      return true;
-    }
+      else return true;
+    } catch (e) {}
   }
   defaultMessage?(): string {
     return 'user already exist';
