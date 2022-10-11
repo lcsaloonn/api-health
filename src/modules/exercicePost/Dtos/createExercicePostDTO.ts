@@ -6,7 +6,6 @@ import {
   IsNotEmpty,
   IsString,
   Validate,
-  ValidateNested,
 } from 'class-validator';
 import { ContentModel } from 'src/Domaine/models/content.model';
 import { ExerciceExistFilter } from 'src/filters/exerciceExist.filter';
