@@ -6,7 +6,7 @@ export class UserModel implements IUser {
   _id: ObjectID;
   username: string;
   password: string;
-  role: UserRole;
+  role: UserRole; //transformer en role[]
 
   constructor(username: string, password: string) {
     this._id = new ObjectID();

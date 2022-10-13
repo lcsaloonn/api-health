@@ -5,7 +5,7 @@ import { UserRepository } from 'src/Infrastructure/repository/user.repository';
 import { CreateUserDto } from 'src/modules/User/Dto/createUser.dto';
 import { AuthService } from '../../../../Application/auth/services/auth/auth.service';
 import { LoginResponse } from 'src/Domaine/Types/userType/userType';
-
+import { LoginUserDTO } from '../../Dto/loginUser.dto';
 @Injectable()
 export class UserSecurityService {
   constructor(
@@ -29,7 +29,8 @@ export class UserSecurityService {
     return this._userRepository.findOneBy(data);
   }
 
-  async login(user: CreateUserDto): Promise<LoginResponse> {
+  async login(user: LoginUserDTO): Promise<LoginResponse> {
+    console.log(user.password);
     const {
       isGoodPassword,
       userfind,
@@ -55,11 +56,13 @@ export class UserSecurityService {
   async ValidateUser(username: string, password: string) {
     try {
       const userfind: UserModel = await this.findByUsername(username);
-      const isGoodPassword = await this.authService.comparePasswords(
-        password,
-        userfind.password,
-      );
-      return { isGoodPassword, userfind };
+      if (userfind) {
+        const isGoodPassword = await this.authService.comparePasswords(
+          password,
+          userfind.password,
+        );
+        return { isGoodPassword, userfind };
+      } else return { isGoodPassword: false, userfind: null };
     } catch (e) {
       throw Error(e);
     }

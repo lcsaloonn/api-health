@@ -7,12 +7,14 @@ import { UserModel } from 'src/modules/User/model/user.model';
 @Injectable()
 export class UserRepository implements IGenericRepository<UserModel> {
   public connection = MongoDb.instance.db.collection('user');
+
   async findOne(id: string | ObjectId): Promise<UserModel> {
     return await this.connection.findOne<UserModel>({
       _id: new ObjectId(id),
     });
   }
 
+  // a modifier
   // eslint-disable-next-line @typescript-eslint/ban-types
   async findOneBy(option: Object): Promise<UserModel> {
     return this.connection.findOne<UserModel>(option);
