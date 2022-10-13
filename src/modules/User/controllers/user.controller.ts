@@ -19,6 +19,7 @@ import { CreateUserSchema } from '../schema/CreateUser.schema';
 import { ReadUserSchema } from '../schema/ReadUser.schema';
 import { ReadUserDto } from '../Dto/readUser.dto';
 import { LoginException } from 'src/exceptions/user/login.exceptions';
+import { LoginUserDTO } from '../Dto/loginUser.dto';
 
 @Controller('user')
 @ApiTags('user')
@@ -36,7 +37,7 @@ export class UserController {
 
   @Post('login')
   @ApiBody({ type: ReadUserSchema })
-  async login(@Body() user: ReadUserDto): Promise<LoginResponse> {
+  async login(@Body() user: LoginUserDTO): Promise<LoginResponse> {
     const response = await this.userSecurityService.login(user);
     if (response.isSuccess) {
       return response;
