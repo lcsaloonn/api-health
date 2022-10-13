@@ -30,7 +30,6 @@ export class UserSecurityService {
   }
 
   async login(user: LoginUserDTO): Promise<LoginResponse> {
-    console.log(user.password);
     const {
       isGoodPassword,
       userfind,
