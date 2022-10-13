@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { ObjectId } from 'mongodb';
 import { UserRole } from 'src/Domaine/Enums/roles.enums';
-import { ReadUserDto } from 'src/modules/User/Dto/readUser.dto';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const bcrypt = require('bcrypt');

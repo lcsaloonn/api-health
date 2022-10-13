@@ -9,7 +9,7 @@ import {
 import { hasRoles } from 'src/Application/auth/decorators/roles.decorator';
 import { JwtAuthGuard } from 'src/Application/auth/Guards/jwt.guard';
 import { RolesGuard } from 'src/Application/auth/Guards/roles.guard';
-import { UserSecurityService } from 'src/modules/User/service/security-services/user-sercurity.service';
+
 import { UserRole } from 'src/Domaine/Enums/roles.enums';
 import { LoginResponse } from 'src/Domaine/Types/userType/userType';
 import { UserModel } from 'src/modules/User/model/user.model';
@@ -17,28 +17,24 @@ import { CreateUserDto } from '../Dto/createUser.dto';
 import { UserService } from '../service/user.service';
 import { CreateUserSchema } from '../schema/CreateUser.schema';
 import { ReadUserSchema } from '../schema/ReadUser.schema';
-import { ReadUserDto } from '../Dto/readUser.dto';
 import { LoginException } from 'src/exceptions/user/login.exceptions';
 import { LoginUserDTO } from '../Dto/loginUser.dto';
 
 @Controller('user')
 @ApiTags('user')
 export class UserController {
-  constructor(
-    private readonly _userService: UserService,
-    private userSecurityService: UserSecurityService,
-  ) {}
+  constructor(private readonly _userService: UserService) {}
 
   @Post('register')
   @ApiBody({ type: CreateUserSchema })
   async createUser(@Body() user: CreateUserDto): Promise<LoginResponse> {
-    return this.userSecurityService.createUser(user);
+    return this._userService.register(user);
   }
 
   @Post('login')
   @ApiBody({ type: ReadUserSchema })
   async login(@Body() user: LoginUserDTO): Promise<LoginResponse> {
-    const response = await this.userSecurityService.login(user);
+    const response = await this._userService.login(user);
     if (response.isSuccess) {
       return response;
     } else {
