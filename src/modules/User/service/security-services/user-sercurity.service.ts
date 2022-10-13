@@ -55,7 +55,7 @@ export class UserSecurityService {
   async ValidateUser(username: string, password: string) {
     try {
       const userfind: UserModel = await this.findByUsername(username);
-      const isGoodPassword = this.authService.comparePasswords(
+      const isGoodPassword = await this.authService.comparePasswords(
         password,
         userfind.password,
       );
