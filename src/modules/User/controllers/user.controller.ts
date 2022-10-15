@@ -1,4 +1,11 @@
-import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  UseGuards,
+  Response,
+} from '@nestjs/common';
 import {
   ApiBearerAuth,
   ApiBody,
@@ -33,10 +40,19 @@ export class UserController {
 
   @Post('login')
   @ApiBody({ type: ReadUserSchema })
-  async login(@Body() user: LoginUserDTO): Promise<LoginResponse> {
+  async login(
+    @Body() user: LoginUserDTO,
+    @Response() res,
+  ): Promise<LoginResponse> {
     const response = await this._userService.login(user);
     if (response.isSuccess) {
-      return response;
+      res.cookie('accesstoken', response.token, {
+        expires: new Date(new Date().getTime() + 30 * 1000),
+        sameSite: 'strict',
+        httpOnly: true,
+        // secure: true,
+      });
+      return res.send(response);
     } else {
       throw new LoginException();
     }

@@ -2,6 +2,7 @@ import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { useContainer } from 'class-validator';
+import * as cookieParser from 'cookie-parser';
 import { AppModule } from './app.module';
 import { MongoDb } from './Infrastructure/DataBase/db.connection';
 const port = process.env.PORT || 3001;
@@ -17,6 +18,9 @@ async function bootstrap() {
 
   //PIPES
   app.useGlobalPipes(new ValidationPipe());
+
+  //Cookie
+  app.use(cookieParser());
 
   //SWAGER
   const config = new DocumentBuilder()
