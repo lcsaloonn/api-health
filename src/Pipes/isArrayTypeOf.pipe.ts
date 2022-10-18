@@ -3,13 +3,12 @@ import {
   ValidatorConstraint,
   ValidatorConstraintInterface,
 } from 'class-validator';
-import { ContentModel } from 'src/Domaine/models/content.model';
 
 //Need to be refactor
 @ValidatorConstraint({ name: 'ArrayRule' })
 @Injectable()
 export class ArrayRule implements ValidatorConstraintInterface {
-  validate(value: Array<ContentModel>): boolean {
+  validate(value: Array<{ id: number; text: string }>): boolean {
     let error = false;
 
     value.forEach((element) => {

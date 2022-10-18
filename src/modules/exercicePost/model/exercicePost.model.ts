@@ -1,5 +1,4 @@
 import { ObjectId } from 'mongodb';
-import { ContentModel } from 'src/Domaine/models/content.model';
 import { IExercicePost } from 'src/Domaine/Types/IExercicePost.interface';
 
 export class ExercicePostModel implements IExercicePost {
@@ -8,14 +7,14 @@ export class ExercicePostModel implements IExercicePost {
   idTitle: string;
   imgUrl: string;
   description: string;
-  howToRealise: ContentModel[];
+  howToRealise: { id: number; text: string }[];
   advice: string[];
 
   constructor(
     idExercice: string,
     idTitle: string,
     description: string,
-    howToRealise: ContentModel[],
+    howToRealise: { id: number; text: string }[],
     advice: string[],
     imgUrl: string,
   ) {

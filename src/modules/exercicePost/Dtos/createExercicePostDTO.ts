@@ -7,7 +7,6 @@ import {
   IsString,
   Validate,
 } from 'class-validator';
-import { ContentModel } from 'src/Domaine/models/content.model';
 import { ExerciceExistFilter } from 'src/filters/exerciceExist.filter';
 import { ArrayRule } from 'src/Pipes/isArrayTypeOf.pipe';
 import { DataRelatedToIdRule } from 'src/Pipes/isDataRelatedToId.pipe';
@@ -31,7 +30,7 @@ export class CreateExercicePostDTO {
   @IsArray()
   @ArrayMinSize(1)
   @Validate(ArrayRule)
-  howToRealise: ContentModel[];
+  howToRealise: { id: number; text: string }[];
 
   @IsNotEmpty()
   @IsArray()

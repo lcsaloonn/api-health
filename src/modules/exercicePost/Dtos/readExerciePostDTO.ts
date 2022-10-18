@@ -1,5 +1,4 @@
 import { ObjectId } from 'mongodb';
-import { ContentModel } from 'src/Domaine/models/content.model';
 
 export class ReadExercicePostDTO {
   _id: ObjectId;
@@ -7,6 +6,6 @@ export class ReadExercicePostDTO {
   idTitle: string;
   imgUrl: string;
   description: string;
-  howToRealise: ContentModel[];
+  howToRealise: { id: number; text: string }[];
   advice: string[];
 }

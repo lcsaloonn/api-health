@@ -1,5 +1,4 @@
 import { ObjectId } from 'mongodb';
-import { ContentModel } from '../models/content.model';
 
 export interface IExercicePost {
   _id: ObjectId;
@@ -7,6 +6,6 @@ export interface IExercicePost {
   idTitle: string;
   imgUrl: string;
   description: string;
-  howToRealise: ContentModel[];
+  howToRealise: { id: number; text: string }[];
   advice: string[];
 }
