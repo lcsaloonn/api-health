@@ -1,26 +1,30 @@
+import { ObjectId } from 'mongodb';
 import { BodyPartEnum } from '../Enums/bodyPart.enum';
 
-export interface ISession {
-  id: string;
+export interface ISessionExercice {
+  id: ObjectId;
   name: string;
-  bodyParts: BodyPartEnum;
+  bodyParts: BodyPartEnum[];
   img: string;
-  time: Date;
+  time: string;
   difficulty: number;
   exercices: IExerciceRealisation[];
 }
 
-interface IExerciceRealisation {
-  exerciceID: string;
+export interface IExerciceRealisation {
+  exerciceID: ObjectId;
   exerciceName: string;
   exerciceAdvice: string;
-  exerciceDifficulty: IExerciceDifficultyType;
+  exerciceInformation: IExerciceInformation;
 }
 
-interface IExerciceDifficultyType {
+export interface IExerciceInformation {
   level: string;
   recovery: number;
   sets: number;
   repetition: number;
-  weight: string;
+  weight: {
+    number: number;
+    unit: string;
+  };
 }
